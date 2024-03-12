@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import styles from "./components/Site.module.css";
+import {Route, Routes} from "react-router-dom";
+import {PageOne} from "./components/pages/PageOne";
+import {PageTwo} from "./components/pages/PageTwo";
+import {PageThree} from "./components/pages/PageThree";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+            <div>
+                <div className={styles.header}><h1>HEADER</h1></div>
+                <div className={styles.body}>
+                    <div className={styles.nav}>
+
+                    </div>
+                    <div className={styles.content}>
+                        <Routes>
+                            <Route  path='page1' element={<PageOne/>}/>
+                            <Route  path='page2' element={<PageTwo/>}/>
+                            <Route  path='page3' element={<PageThree/>}/>
+                        </Routes>
+                    </div>
+                </div>
+                <div className={styles.footer}>abibas 2023</div>
+            </div>
+
+    );
 }
+
 
 export default App;
