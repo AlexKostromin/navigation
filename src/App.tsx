@@ -1,11 +1,23 @@
 import React, {useState} from 'react';
 import styles from "./components/Site.module.css";
 import {Navigate, NavLink, Route, Routes} from "react-router-dom";
-import {PageOne} from "./components/pages/PageOne";
-import {PageTwo} from "./components/pages/PageTwo";
-import {PageThree} from "./components/pages/PageThree";
+import {Adidas} from "./components/pages/Adidas";
+import {Puma} from "./components/pages/Puma";
+import {Abibas} from "./components/pages/Abibas";
 import {Error404} from "./components/pages/Error404";
+import {NavWrapper} from "./components/pages/_styles";
+import {Model} from "./components/pages/Model";
 
+
+
+
+
+export const PATH = {
+    PAGE1:'/adidas',
+    PAGE2:'/puma',
+    PAGE3:'/abibas',
+    MODELPAGE:'adidas/:id'
+} as const
 
 function App() {
     return (
@@ -13,18 +25,20 @@ function App() {
                 <div className={styles.header}><h1>HEADER</h1></div>
                 <div className={styles.body}>
                     <div className={styles.nav}>
-                        <div><NavLink to={'page1'} className={({isActive})=> isActive ? styles.active : styles.navLink }>Page1</NavLink></div>
-                        <div><NavLink to={'page2'} className={({isActive})=> isActive ? styles.active : styles.navLink }>Page2</NavLink></div>
-                        <div><NavLink to={'page3'} className={({isActive})=> isActive ? styles.active : styles.navLink }>Page3</NavLink></div>
+                        <NavWrapper><NavLink to={PATH.PAGE1}>Adidas</NavLink></NavWrapper>
+                        <NavWrapper><NavLink to={PATH.PAGE2}>Puma</NavLink></NavWrapper>
+                        <NavWrapper><NavLink to={PATH.PAGE3}>Abibas</NavLink></NavWrapper>
                     </div>
                     <div className={styles.content}>
                         <Routes>
-                            <Route  path='/' element={<Navigate to={'page1'}/>}/>
-                            <Route  path='page1' element={<PageOne/>}/>
-                            <Route  path='page2' element={<PageTwo/>}/>
-                            <Route  path='page3' element={<PageThree/>}/>
-                            <Route  path='page/error' element={<Error404/>}/>
-                            <Route path={'/*'} element={<Navigate to={'page/error'}/>}/>
+                            <Route  path='/' element={<Navigate to={PATH.PAGE1}/>}/>
+                            <Route  path={PATH.PAGE1} element={<Adidas/>}/>
+                            <Route  path={PATH.PAGE2} element={<Puma/>}/>
+                            <Route  path={PATH.PAGE3} element={<Abibas/>}/>
+                            <Route path={PATH.MODELPAGE} element={<Model/>}/>
+                            <Route path={'/*'} element={<Error404/>}/>
+                            {/*<Route  path={PATH.ERRORPAGE} element={<Error404/>}/>
+                            <Route path={'/*'} element={<Navigate to={'page/error'}/>}/>*/}
                         </Routes>
                     </div>
                 </div>
@@ -36,3 +50,4 @@ function App() {
 
 
 export default App;
+
